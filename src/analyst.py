@@ -285,6 +285,7 @@ def main():
     parser = argparse.ArgumentParser(description="Run the Finance Purple Agent")
     parser.add_argument("--host", type=str, default="127.0.0.1", help="Host to bind")
     parser.add_argument("--port", type=int, default=9020, help="Port to bind")
+    parser.add_argument("--card-url", type=str, help="URL to advertise in the agent card")
     args = parser.parse_args()
     
     skill = AgentSkill(
@@ -304,7 +305,7 @@ def main():
                     "(1) Risk Classification - categorizes risk factors, "
                     "(2) Business Summary - extracts key business information, "
                     "(3) Consistency Check - identifies which risks are discussed in MD&A.",
-        url=f"http://{args.host}:{args.port}/",
+        url=args.card_url or f"http://{args.host}:{args.port}/",
         version="1.0.0",
         default_input_modes=["text"],
         default_output_modes=["text"],
